@@ -1,6 +1,6 @@
 name: 'Calificación de las fases del proyecto'
 
-on: 
+on:
   push:
     branches: ['master', 'develop']
   pull_request:
@@ -9,72 +9,64 @@ on:
 jobs:
   threads:
     name: 'Fase: Threads'
-    runs-on: 'ubuntu-16.04'
+    runs-on: 'ubuntu-latest'
     env:
       phase: 'threads'
     steps:
       - name: 'Clonando repositorio'
         uses: 'actions/checkout@v2'
-      - name: 'Instalando Qemu'
-        uses: './.github/qemu-install'
-      - name: 'Configurando entorno y ejecutando tests'
-        uses: './.github/env-config'
+      - name: 'Build and Check'
+        id: 'phase'
+        uses: './.github/docker'
         with:
-          phase: '${{ env.phase }}'
-      - name: 'Score'
-        working-directory: '/home/runner/pintos/${{ env.phase }}/build'
-        run: 'cat grade'
+            phase: '${{ env.phase }}'
+      - name: 'Show results'
+        run: 'echo "${{ steps.phase.outputs.results }}"'
 
   userprog:
     name: 'Fase: User Programs'
-    runs-on: 'ubuntu-16.04'
+    runs-on: 'ubuntu-latest'
     env:
       phase: 'userprog'
     steps:
       - name: 'Clonando repositorio'
         uses: 'actions/checkout@v2'
-      - name: 'Instalando Qemu'
-        uses: './.github/qemu-install'
-      - name: 'Configurando entorno y ejecutando tests'
-        uses: './.github/env-config'
+      - name: 'Build and Check'
+        id: 'phase'
+        uses: './.github/docker'
         with:
-          phase: '${{ env.phase }}'
-      - name: 'Score'
-        working-directory: '/home/runner/pintos/${{ env.phase }}/build'
-        run: 'cat grade'
+            phase: '${{ env.phase }}'
+      - name: 'Show results'
+        run: 'echo "${{ steps.phase.outputs.results }}"'
 
   vm:
     name: 'Fase: Virtual Memory'
-    runs-on: 'ubuntu-16.04'
+    runs-on: 'ubuntu-latest'
     env:
       phase: 'vm'
     steps:
       - name: 'Clonando repositorio'
         uses: 'actions/checkout@v2'
-      - name: 'Instalando Qemu'
-        uses: './.github/qemu-install'
-      - name: 'Configurando entorno y ejecutando tests'
-        uses: './.github/env-config'
+      - name: 'Build and Check'
+        id: 'phase'
+        uses: './.github/docker'
         with:
-          phase: '${{ env.phase }}'
-      - name: 'Score'
-        working-directory: '/home/runner/pintos/${{ env.phase }}/build'
-        run: 'cat grade'
+            phase: '${{ env.phase }}'
+      - name: 'Show results'
+        run: 'echo "${{ steps.phase.outputs.results }}"'
 
   filesys:
     name: 'Fase: File System'
-    runs-on: 'ubuntu-16.04'
+    runs-on: 'ubuntu-latest'
     env:
       phase: 'filesys'
     steps:
       - name: 'Clonando repositorio'
         uses: 'actions/checkout@v2'
-      - name: 'Instalando Qemu'
-        uses: './.github/qemu-install'
-      - name: 'Configurando entorno y ejecutando tests'
-        uses: './.github/env-config'
+      - name: 'Build and Check'
+        id: 'phase'
+        uses: './.github/docker'
         with:
-          phase: '${{ env.phase }}'
-      - name: 'Score'
-        working-directory: '/home/runner/pintos/${{ env.phase }}/build'
-        run: 'cat grade'
+            phase: '${{ env.phase }}'
+      - name: 'Show results'
+        run: 'echo "${{ steps.phase.outputs.results }}"'
