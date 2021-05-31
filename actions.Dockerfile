@@ -12,6 +12,6 @@ env PINTOSPH=$phase
 add . .
 run echo $PINTOSPH
 run cd /root/pintos/$PINTOSPH && make && make grade
-run ["bash", "builder.sh", "/root/pintos/$PINTOSPH/build/grade"]
+run bash builder.sh /root/pintos/$PINTOSPH/build/grade
 
 
