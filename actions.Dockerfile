@@ -12,7 +12,6 @@ env PINTOSPH=$phase
 add . .
 run echo $PINTOSPH
 run cd /root/pintos/$PINTOSPH && make && make grade
-run echo "#/bin/bash\nGRADE=\`cat /root/pintos/\$PINTOSPH/build/grade\` && GRADE=\"\${GRADE//'%'/'%25'}\" && echo \$GRADE && GRADE=\"\${GRADE//$'\\n'/'%0A'}\" && GRADE=\"\${GRADE//$'\\r'/'%0D'}\" && echo \"::set-output name=results::\$GRADE\"" | tee builder.sh && chmod +x builder.sh
-run ["bash", "builder.sh"]
+run ["bash", "builder.sh", "/root/pintos/$PINTOSPH/build/grade"]
 
 
