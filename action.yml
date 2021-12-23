@@ -1,5 +1,4 @@
-name: 'pintos-checker'
-author: 'Benyamin Galeano'
+name: 'Pintos Checker'
 description: 'Build the docker image for grading'
 inputs:
   phase:
